@@ -3,23 +3,32 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 var userSchema = new mongoose.Schema({
+  profilePicture: {
+    type: String,
+  },
+  firstName: {
+    type: String,
+  },
+  lastName: {
+    type: String,
+  },
+  mobileNumber: {
+    type: Number,
+  },
   email: {
     type: String,
     unique: true,
   },
-  mobileNo: {
-    type: Number,
+  nicNumber: {
+    type: String,
+  },
+  nicFrontImage: {
+    type: String,
+  },
+  nicBackImage: {
+    type: String,
   },
   password: {
-    type: String,
-  },
-  name: {
-    type: String,
-  },
-  profilePicture: {
-    type: String,
-  },
-  nic: {
     type: String,
   },
   saltSecret: {
