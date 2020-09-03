@@ -14,12 +14,11 @@ module.exports.register = (req, res, next) => {
   user.nicFrontImage = req.body.nicFrontImage;
   user.nicBackImage = req.body.nicBackImage;
   user.password = req.body.password;
-
   user.save((err, doc) => {
     if (err) {
       console.log("register error: " + JSON.stringify(err, undefined, 2));
       if (err.code == 11000) {
-        res.status(422).send(["Duplicate email found"]);
+        res.status(422).send(["Duplicate email address found"]);
       }
     } else {
       res.send(doc);
@@ -29,7 +28,7 @@ module.exports.register = (req, res, next) => {
 
 module.exports.authenticate = (req, res, next) => {
   // call for passport authentication
-  passport.authenticate("user-local", (err, user, info) => {
+  passport.authenticate("local", (err, user, info) => {
     if (err) {
       // error from passport middleware
       return res.status(400).json(err);
