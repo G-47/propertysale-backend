@@ -11,5 +11,6 @@ router.post("/authenticateUser", ctrlUser.authenticate);
 
 //MANAGER CONTROLLERS
 router.get("/getAdmins",ctrlAdmin.allAdmins);
+router.post("/postMessage",ctrlAdmin.postMessage);
 
 module.exports = router;
