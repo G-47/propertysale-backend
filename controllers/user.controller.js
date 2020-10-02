@@ -36,7 +36,7 @@ module.exports.authenticate = (req, res, next) => {
       // user is authenticated
       return res.status(200).json({ token: user.generateJwt() });
     } else {
-      // unknown user ow wrong password
+      // unknown user or wrong password
       return res.status(404).json(info);
     }
   })(req, res);
