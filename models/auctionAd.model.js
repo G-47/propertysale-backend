@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-var auctionAdschema = new mongoose.Schema({
+var auctionAdSchema = new mongoose.Schema({
     name:{type:String},
     type:{type:String},
     size:{type:String},
@@ -14,4 +14,4 @@ var auctionAdschema = new mongoose.Schema({
     startBid:{type: Number}
 });
 
-mongoose.model('AuctionAds',auctionAdschema);
+mongoose.model('AuctionAds',auctionAdSchema);

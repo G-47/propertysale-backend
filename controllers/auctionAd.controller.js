@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const AuctionAd = mongoose.model("AuctionAd");
+const AuctionAd = mongoose.model("AuctionAds");
 
 module.exports.insertAuctionAd = (req, res) => {
     var auctionAd = new AuctionAd({
