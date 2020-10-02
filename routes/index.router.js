@@ -10,7 +10,9 @@ router.post("/registerUser", ctrlUser.register);
 router.post("/authenticateUser", ctrlUser.authenticate);
 
 //MANAGER CONTROLLERS
-router.get("/getAdmins",ctrlAdmin.allAdmins);
-router.post("/postMessage",ctrlAdmin.postMessage);
+router.get("/getAdmins",jwtHelper.verifyJwtToken,ctrlAdmin.allAdmins);
+router.post("/registerAdmin",jwtHelper.verifyJwtToken,ctrlAdmin.registerAdmin);
+router.post("/postMessage",jwtHelper.verifyJwtToken,ctrlAdmin.postMessage);
+router.post("/postAuctionProperty",jwtHelper.verifyJwtToken,ctrlAdmin.postAuctionProperty)
 
 module.exports = router;

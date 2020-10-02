@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
 const Admin = mongoose.model("Admin");
 const Message = mongoose.model("Message");
+const NewAuction = mongoose.model("NewAuction");
 
+//register a admin
 module.exports.registerAdmin = (req, res) => {
   var admin = new Admin({
     name: req.body.name,
@@ -18,6 +20,7 @@ module.exports.registerAdmin = (req, res) => {
   });
 };
 
+//get all  admins
 module.exports.allAdmins = (req, res) => {
   Admin.find((err, docs) => {
     if (!err) {
@@ -27,6 +30,8 @@ module.exports.allAdmins = (req, res) => {
     }
   });
 };
+
+//send messages to admin
 
 module.exports.postMessage = (req, res) => {
   var message = new Message({
@@ -43,3 +48,31 @@ module.exports.postMessage = (req, res) => {
     }
   });
 };
+
+// Post a property for a new auction
+
+module.exports.postAuctionProperty=(req,res)=>{
+  var property = new NewAuction({
+    title:req.body.title,
+    startBid:req.body.startBid,
+    interval:req.body.interval,
+    size:req.body.size,
+    propertyType:req.body.propertyType,
+    location:req.body.location,
+    description:req.body.description,
+    image:req.body.image,
+    startDate:req.body.startDate,
+    endDate:req.body.endDate,
+    currentBid:req.body.currentBid,
+    currentBidHolder:req.body.currentBidHolder,
+    status:"pending"
+  });
+
+  property.save((err,doc)=>{
+    if(err){
+      console.log("add error: " + JSON.stringify(err, undefined, 2));
+    }else{
+      res.send(doc);
+    }
+  })
+}
