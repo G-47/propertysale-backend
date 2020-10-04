@@ -10,5 +10,7 @@ mongoose.connect(process.env.MONGODB_URI, (err) => {
 
 require('./models/user.model');
 require('./models/admin.model');
+require('./models/message.model');
+require('./models/newAuctionProperty.model');
 require('./models/directLand.model');
 require('./models/directHouse.model');
