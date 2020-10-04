@@ -3,12 +3,12 @@
     "PORT": 3000,
     "MONGODB_URI": "mongodb+srv://innathanak:bassaponnaya@cluster0-kxbmt.mongodb.net/innathanak?retryWrites=true&w=majority",
     "JWT_SECRET": "ezylands",
-    "JWT_EXP": "5h"
+    "JWT_EXP": "24h"
   },
   "production": {
     "PORT": 80,
     "MONGODB_URI": "mongodb+srv://group47:group47@cluster0.qge6u.mongodb.net/ezylands?retryWrites=true&w=majority",
     "JWT_SECRET": "eylands",
-    "JWT_EXP": "5h"
+    "JWT_EXP": "24h"
   }
 }
