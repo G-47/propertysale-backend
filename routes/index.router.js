@@ -20,6 +20,9 @@ router.get("/getDirectHouses", ctrlDirectHouse.allDirectHouses);
 router.post("/addDirectHouse", jwtHelper.verifyJwtToken, ctrlDirectHouse.addDirectHouse);
 
 //MANAGER CONTROLLERS
-router.get("/getAdmins",ctrlAdmin.allAdmins);
+router.get("/getAdmins",jwtHelper.verifyJwtToken,ctrlAdmin.allAdmins);
+router.post("/registerAdmin",jwtHelper.verifyJwtToken,ctrlAdmin.registerAdmin);
+router.post("/postMessage",jwtHelper.verifyJwtToken,ctrlAdmin.postMessage);
+router.post("/postAuctionProperty",jwtHelper.verifyJwtToken,ctrlAdmin.postAuctionProperty)
 
 module.exports = router;
