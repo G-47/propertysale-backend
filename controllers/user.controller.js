@@ -15,6 +15,7 @@ module.exports.register = (req, res, next) => {
   user.nicBackImage = req.body.nicBackImage;
   user.userType = req.body.userType;
   user.password = req.body.password;
+
   user.save((err, doc) => {
     if (err) {
       console.log("register error: " + JSON.stringify(err, undefined, 2));
@@ -41,4 +42,14 @@ module.exports.authenticate = (req, res, next) => {
       return res.status(404).json(info);
     }
   })(req, res);
+};
+
+module.exports.getUser = (req, res) => {
+  User.findById(req._id, (err, doc) => {
+    if (!err) {
+      res.send({ user: doc });
+    } else {
+      res.send("Error in retrieving: " + JSON.stringify(err, undefined, 2));
+    }
+  });
 };
