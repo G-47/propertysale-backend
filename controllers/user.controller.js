@@ -13,6 +13,7 @@ module.exports.register = (req, res, next) => {
   user.nicNumber = req.body.nicNumber;
   user.nicFrontImage = req.body.nicFrontImage;
   user.nicBackImage = req.body.nicBackImage;
+  user.userType = req.body.userType;
   user.password = req.body.password;
   user.save((err, doc) => {
     if (err) {

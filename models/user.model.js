@@ -28,6 +28,9 @@ var userSchema = new mongoose.Schema({
   nicBackImage: {
     type: String,
   },
+  userType: {
+    type: Number,
+  },
   password: {
     type: String,
   },
