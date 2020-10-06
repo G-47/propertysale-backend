@@ -14,14 +14,14 @@ router.post("/authenticateUser", ctrlUser.authenticate);
 router.get("/getUser", jwtHelper.verifyJwtToken, ctrlUser.getUser);
 
 // DIRECT LAND/HOUSE CONTROLLERS
-router.get("/getDirectLands", ctrlDirectLand.allDirectLands);
+router.post("/getDirectLands", ctrlDirectLand.allDirectLands);
 router.post(
   "/addDirectLand",
   jwtHelper.verifyJwtToken,
   ctrlDirectLand.addDirectLand
 );
 
-router.get("/getDirectHouses", ctrlDirectHouse.allDirectHouses);
+router.post("/getDirectHouses", ctrlDirectHouse.allDirectHouses);
 router.post(
   "/addDirectHouse",
   jwtHelper.verifyJwtToken,

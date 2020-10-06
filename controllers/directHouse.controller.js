@@ -10,9 +10,11 @@ module.exports.addDirectHouse = (req, res) => {
     price: req.body.price,
     locationName: req.body.locationName,
     locationMap: req.body.locationMap,
+    images: req.body.images,
     isFromOwner: req.body.isFromOwner,
     ownerId: req._id,
     status: req.body.status,
+    postedTime: Date.now(),
   });
 
   directHouse.save((err, doc) => {
@@ -25,7 +27,7 @@ module.exports.addDirectHouse = (req, res) => {
 };
 
 module.exports.allDirectHouses = (req, res) => {
-  directHouse.find((err, docs) => {
+  directHouse.find({ status: req.body.status }, (err, docs) => {
     if (!err) {
       res.send(docs);
     } else {

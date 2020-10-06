@@ -27,6 +27,9 @@ var directLandSchema = new mongoose.Schema({
       lng: Number,
     },
   },
+  images: {
+    type: Array,
+  },
   isFromOwner: {
     type: Boolean,
   },
@@ -34,6 +37,9 @@ var directLandSchema = new mongoose.Schema({
     type: String,
   },
   status: {
+    type: Number,
+  },
+  postedTime: {
     type: Number,
   },
 });
