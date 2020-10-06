@@ -23,21 +23,19 @@ var directLandSchema = new mongoose.Schema({
   },
   locationMap: {
     type: {
-        lat: Number,
-        lang: Number
+      lat: Number,
+      lng: Number,
     },
   },
   isFromOwner: {
-      type: Boolean ,
+    type: Boolean,
   },
   ownerId: {
-      type: String
+    type: String,
   },
   status: {
-    type: Number
-  }
-
+    type: Number,
+  },
 });
-
 
 mongoose.model("DirectLand", directLandSchema);
