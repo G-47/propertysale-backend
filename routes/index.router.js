@@ -5,6 +5,7 @@ const ctrlUser = require("../controllers/user.controller");
 const ctrlAdmin = require("../controllers/admin.controller");
 const ctrlDirectLand = require("../controllers/directLand.controller");
 const ctrlDirectHouse = require("../controllers/directHouse.controller");
+const ctrlEmail = require("../controllers/email.controller");
 
 const jwtHelper = require("../config/jwtHelper");
 
@@ -41,5 +42,8 @@ router.post(
   jwtHelper.verifyJwtToken,
   ctrlAdmin.postAuctionProperty
 );
+
+//EMAIL CONTROLLER
+router.post("/send", jwtHelper.verifyJwtToken, ctrlEmail.send);
 
 module.exports = router;
