@@ -7,6 +7,7 @@ const ctrlDirectLand = require("../controllers/directLand.controller");
 const ctrlDirectHouse = require("../controllers/directHouse.controller");
 
 const jwtHelper = require("../config/jwtHelper");
+const { verify } = require("jsonwebtoken");
 
 // USER CONTROLLERS
 router.post("/registerUser", ctrlUser.register);
@@ -46,5 +47,7 @@ router.post(
   jwtHelper.verifyJwtToken,
   ctrlAdmin.postAuctionProperty
 );
+
+router.delete('/removeAdmin/:id',jwtHelper.verifyJwtToken,ctrlAdmin.removeAdmin);
 
 module.exports = router;
