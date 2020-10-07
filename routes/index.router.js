@@ -6,6 +6,7 @@ const ctrlAdmin = require("../controllers/admin.controller");
 const ctrlDirectLand = require("../controllers/directLand.controller");
 const ctrlDirectHouse = require("../controllers/directHouse.controller");
 const ctrlEmail = require("../controllers/email.controller");
+const ctrlReport = require("../controllers/report.controller");
 
 const jwtHelper = require("../config/jwtHelper");
 
@@ -45,5 +46,8 @@ router.post(
 
 //EMAIL CONTROLLER
 router.post("/send", jwtHelper.verifyJwtToken, ctrlEmail.send);
+
+//REPORT CONTROLLER
+router.post("/report", jwtHelper.verifyJwtToken, ctrlReport.create);
 
 module.exports = router;
