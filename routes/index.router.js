@@ -9,11 +9,17 @@ const ctrlEmail = require("../controllers/email.controller");
 const ctrlReport = require("../controllers/report.controller");
 
 const jwtHelper = require("../config/jwtHelper");
+const { verify } = require("jsonwebtoken");
 
 // USER CONTROLLERS
 router.post("/registerUser", ctrlUser.register);
 router.post("/authenticateUser", ctrlUser.authenticate);
-router.get("/getUser", jwtHelper.verifyJwtToken, ctrlUser.getUser);
+router.get(
+  "/getCurrentUser",
+  jwtHelper.verifyJwtToken,
+  ctrlUser.getCurrentUser
+);
+router.post("/getUser", jwtHelper.verifyJwtToken, ctrlUser.getUser);
 
 // DIRECT LAND/HOUSE CONTROLLERS
 router.post("/getDirectLands", ctrlDirectLand.allDirectLands);
@@ -22,12 +28,22 @@ router.post(
   jwtHelper.verifyJwtToken,
   ctrlDirectLand.addDirectLand
 );
+router.put(
+  "/acceptDirectLand",
+  jwtHelper.verifyJwtToken,
+  ctrlDirectLand.acceptDirectLand
+);
 
 router.post("/getDirectHouses", ctrlDirectHouse.allDirectHouses);
 router.post(
   "/addDirectHouse",
   jwtHelper.verifyJwtToken,
   ctrlDirectHouse.addDirectHouse
+);
+router.put(
+  "/acceptDirectHouse",
+  jwtHelper.verifyJwtToken,
+  ctrlDirectHouse.acceptDirectHouse
 );
 
 //MANAGER CONTROLLERS
@@ -43,9 +59,10 @@ router.post(
   jwtHelper.verifyJwtToken,
   ctrlAdmin.postAuctionProperty
 );
+router.delete('/removeAdmin/:id',jwtHelper.verifyJwtToken,ctrlAdmin.removeAdmin);
 
 //EMAIL CONTROLLER
-router.post("/send", jwtHelper.verifyJwtToken, ctrlEmail.send);
+router.post("/sendEmail", ctrlEmail.send);
 
 //REPORT CONTROLLER
 router.post("/report", jwtHelper.verifyJwtToken, ctrlReport.create);
