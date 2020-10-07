@@ -5,6 +5,7 @@ const ctrlUser = require("../controllers/user.controller");
 const ctrlAdmin = require("../controllers/admin.controller");
 const ctrlDirectLand = require("../controllers/directLand.controller");
 const ctrlDirectHouse = require("../controllers/directHouse.controller");
+const ctrlEmail = require("../controllers/email.controller");
 
 const jwtHelper = require("../config/jwtHelper");
 const { verify } = require("jsonwebtoken");
@@ -57,7 +58,9 @@ router.post(
   jwtHelper.verifyJwtToken,
   ctrlAdmin.postAuctionProperty
 );
-
 router.delete('/removeAdmin/:id',jwtHelper.verifyJwtToken,ctrlAdmin.removeAdmin);
+
+//EMAIL CONTROLLER
+router.post("/sendEmail", ctrlEmail.send);
 
 module.exports = router;
