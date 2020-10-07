@@ -19,6 +19,8 @@ const nodemailer = require("nodemailer");
 // });
 
 module.exports.send = (req, res) => {
+  console.log("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
+
   let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -39,10 +41,12 @@ module.exports.send = (req, res) => {
 
   transporter.sendMail(mailOption, (error, info) => {
     if (error) {
+      res.send({ error: "Email has not been sent..." });
       return console.log(error);
+    } else {
+      res.send({ msg: "Email has been sent..." });
     }
     console.log("email has been sent");
-    // res.render("contact", { msg: "Email has been sent..." });
   });
 };
 

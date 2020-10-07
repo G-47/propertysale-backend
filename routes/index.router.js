@@ -44,6 +44,8 @@ router.post(
 );
 
 //EMAIL CONTROLLER
-router.post("/send", jwtHelper.verifyJwtToken, ctrlEmail.send);
+// router.post("/send", jwtHelper.verifyJwtToken, ctrlEmail.send);
+
+router.post("/sendEmail", ctrlEmail.send);
 
 module.exports = router;
