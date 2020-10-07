@@ -11,7 +11,12 @@ const jwtHelper = require("../config/jwtHelper");
 // USER CONTROLLERS
 router.post("/registerUser", ctrlUser.register);
 router.post("/authenticateUser", ctrlUser.authenticate);
-router.get("/getUser", jwtHelper.verifyJwtToken, ctrlUser.getUser);
+router.get(
+  "/getCurrentUser",
+  jwtHelper.verifyJwtToken,
+  ctrlUser.getCurrentUser
+);
+router.post("/getUser", jwtHelper.verifyJwtToken, ctrlUser.getUser);
 
 // DIRECT LAND/HOUSE CONTROLLERS
 router.post("/getDirectLands", ctrlDirectLand.allDirectLands);
