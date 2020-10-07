@@ -3,6 +3,7 @@ const router = express.Router();
 
 const ctrlUser = require("../controllers/user.controller");
 const ctrlAdmin = require("../controllers/admin.controller");
+const ctrlBidding = require("../controllers/bidding.controller");
 const ctrlAuctionLandAd = require("../controllers/auctionLandAd.controller");
 const jwtHelper = require("../config/jwtHelper");
 
@@ -16,5 +17,9 @@ router.get("/getAdmins",ctrlAdmin.allAdmins);
 //AUCTION ADS CONTROLLERS
 router.post("/addAuctionLandAd",ctrlAuctionLandAd.insertAuctionLandAd);
 router.get("/getAllLandAds",ctrlAuctionLandAd.allAuctionLandAds);
+
+//BIDDING
+router.get("/insertBid",ctrlBidding.insertBid);
+router.get("/getAllBids",ctrlBidding.getAllBiddings);
 
 module.exports = router;

@@ -1,20 +1,22 @@
 const mongoose = require("mongoose");
 const AuctionLandAd = mongoose.model("AuctionLandAd");
+console.log(Date.now());
 
 module.exports.insertAuctionLandAd = (req, res) => {
     var auctionLandAd = new AuctionLandAd({
-      title: req.body.name,
+      title: req.body.title,
       type:req.body.type,
       size:req.body.size,
       description:req.body.description,
       threeSixtyImageUrl:req.body.threeSixtyImageUrl,
-      extracts:req.body.extracts,
-      otherImages:req.body.otherImages,
-      location: req.body.location,
-      mapCordinates:req.body.mapCordinates,
+      images:req.body.images,
+      locationName: req.body.locationName,
+      locationMap:req.body.locationMap,
       startDate:req.body.startDate,
       endDate:req.body.endDate,
-      startBid:req.body.startBid
+      startBid:req.body.startBid,
+      currentBid: req.body.currentBid,
+      postedTime: Date.now()
     });
   
     auctionLandAd.save((err, doc) => {
@@ -27,7 +29,7 @@ module.exports.insertAuctionLandAd = (req, res) => {
   };
   
   module.exports.allAuctionLandAds = (req, res) => {
-    AuctionAd.find((err, docs) => {
+    AuctionLandAd.find({endDate: {$gt : Date.now()}},(err, docs) => {
       if (!err) {
         res.send(docs);
       } else {

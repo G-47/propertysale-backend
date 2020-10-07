@@ -11,3 +11,4 @@ mongoose.connect(process.env.MONGODB_URI, (err) => {
 require('./models/user.model');
 require('./models/admin.model');
 require('./models/auctionLandAd.model');
+require('./models/bidding.model');
