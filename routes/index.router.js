@@ -25,12 +25,22 @@ router.post(
   jwtHelper.verifyJwtToken,
   ctrlDirectLand.addDirectLand
 );
+router.put(
+  "/acceptDirectLand",
+  jwtHelper.verifyJwtToken,
+  ctrlDirectLand.acceptDirectLand
+);
 
 router.post("/getDirectHouses", ctrlDirectHouse.allDirectHouses);
 router.post(
   "/addDirectHouse",
   jwtHelper.verifyJwtToken,
   ctrlDirectHouse.addDirectHouse
+);
+router.put(
+  "/acceptDirectHouse",
+  jwtHelper.verifyJwtToken,
+  ctrlDirectHouse.acceptDirectHouse
 );
 
 //MANAGER CONTROLLERS
