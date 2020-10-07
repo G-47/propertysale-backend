@@ -44,8 +44,18 @@ module.exports.authenticate = (req, res, next) => {
   })(req, res);
 };
 
-module.exports.getUser = (req, res) => {
+module.exports.getCurrentUser = (req, res) => {
   User.findById(req._id, (err, doc) => {
+    if (!err) {
+      res.send({ user: doc });
+    } else {
+      res.send("Error in retrieving: " + JSON.stringify(err, undefined, 2));
+    }
+  });
+};
+
+module.exports.getUser = (req, res) => {
+  User.findById(req.body.id, (err, doc) => {
     if (!err) {
       res.send({ user: doc });
     } else {

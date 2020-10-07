@@ -51,28 +51,46 @@ module.exports.postMessage = (req, res) => {
 
 // Post a property for a new auction
 
-module.exports.postAuctionProperty=(req,res)=>{
+module.exports.postAuctionProperty = (req, res) => {
   var property = new NewAuction({
-    title:req.body.title,
-    startBid:req.body.startBid,
-    interval:req.body.interval,
-    size:req.body.size,
-    propertyType:req.body.propertyType,
-    location:req.body.location,
-    description:req.body.description,
-    image:req.body.image,
-    startDate:req.body.startDate,
-    endDate:req.body.endDate,
-    currentBid:req.body.currentBid,
-    currentBidHolder:req.body.currentBidHolder,
-    status:"pending"
+    title: req.body.title,
+    startBid: req.body.startBid,
+    interval: req.body.interval,
+    size: req.body.size,
+    propertyType: req.body.propertyType,
+    location: req.body.location,
+    description: req.body.description,
+    image: req.body.image,
+    startDate: req.body.startDate,
+    endDate: req.body.endDate,
+    currentBid: req.body.currentBid,
+    currentBidHolder: req.body.currentBidHolder,
+    status: "pending",
   });
 
-  property.save((err,doc)=>{
-    if(err){
+  property.save((err, doc) => {
+    if (err) {
       console.log("add error: " + JSON.stringify(err, undefined, 2));
-    }else{
+    } else {
       res.send(doc);
+    }
+  });
+};
+
+module.exports.removeAdmin = (req, res) => {
+  Admin.findByIdAndDelete(req.params.id, (err, docs) => {
+    if (docs) {
+      if (!err) {
+        return res.send(docs);
+      } else {
+        return res
+          .status(404)
+          .json({ status: false, message: "not found admin" });
+      }
+    } else {
+      return res
+        .status(404)
+        .json({ status: false, message: "not found admin" });
     }
   })
 }

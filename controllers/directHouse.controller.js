@@ -35,3 +35,20 @@ module.exports.allDirectHouses = (req, res) => {
     }
   });
 };
+
+module.exports.acceptDirectHouse = (req, res) => {
+  DirectHouse.findByIdAndUpdate(
+    req.body.id,
+    { status: 1 },
+    { new: true },
+    (err, doc) => {
+      if (err) {
+        return res
+          .status(404)
+          .json({ status: false, message: "Record not found" });
+      } else {
+        res.send(doc);
+      }
+    }
+  );
+};

@@ -35,3 +35,20 @@ module.exports.allDirectLands = (req, res) => {
     }
   });
 };
+
+module.exports.acceptDirectLand = (req, res) => {
+  DirectLand.findByIdAndUpdate(
+    req.body.id,
+    { status: 1 },
+    { new: true },
+    (err, doc) => {
+      if (err) {
+        return res
+          .status(404)
+          .json({ status: false, message: "Record not found" });
+      } else {
+        res.send(doc);
+      }
+    }
+  );
+};
