@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Admin = mongoose.model("Admin");
 const Message = mongoose.model("Message");
 const NewAuction = mongoose.model("NewAuction");
+const Logger = mongoose.model("Logger");
 
 //register a admin
 module.exports.registerAdmin = (req, res) => {
@@ -25,10 +26,20 @@ module.exports.allAdmins = (req, res) => {
   Admin.find((err, docs) => {
     if (!err) {
       res.send(docs);
+      var log = new Logger({
+        endpoint: req.url,
+        req_ip: req.ip,
+        timestamp: Date.now(),
+        status_code: res.statusCode,
+      });
+      log.save((doc) => {
+        res.send(doc);
+      });
     } else {
       res.send("Error in retrieving: " + JSON.stringify(err, undefined, 2));
     }
   });
+  console.log(req.url, req.ip, res.statusCode, Date.now());
 };
 
 //send messages to admin
@@ -92,5 +103,5 @@ module.exports.removeAdmin = (req, res) => {
         .status(404)
         .json({ status: false, message: "not found admin" });
     }
-  })
-}
+  });
+};

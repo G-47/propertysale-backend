@@ -14,3 +14,4 @@ require('./models/message.model');
 require('./models/newAuctionProperty.model');
 require('./models/directLand.model');
 require('./models/directHouse.model');
+require('./models/logger.model');
