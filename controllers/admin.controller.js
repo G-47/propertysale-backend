@@ -4,6 +4,23 @@ const Message = mongoose.model("Message");
 const NewAuction = mongoose.model("NewAuction");
 const Logger = mongoose.model("Logger");
 
+function logdata(req, res) {
+  var log = new Logger({
+    endpoint: req.url,
+    req_ip: req.connection.remoteAddress,
+    timestamp: Date.now(),
+    status_code: res.statusCode,
+    method:req.method,
+    user_id:req._id,
+  });
+  log.save((err, doc) => {
+    if (err) {
+      res.send(doc);
+    } else {
+    }
+  });
+}
+
 //register a admin
 module.exports.registerAdmin = (req, res) => {
   var admin = new Admin({
@@ -16,6 +33,7 @@ module.exports.registerAdmin = (req, res) => {
     if (err) {
       console.log("add error: " + JSON.stringify(err, undefined, 2));
     } else {
+      logdata(req, res);
       res.send(doc);
     }
   });
@@ -26,15 +44,6 @@ module.exports.allAdmins = (req, res) => {
   Admin.find((err, docs) => {
     if (!err) {
       res.send(docs);
-      var log = new Logger({
-        endpoint: req.url,
-        req_ip: req.ip,
-        timestamp: Date.now(),
-        status_code: res.statusCode,
-      });
-      log.save((doc) => {
-        res.send(doc);
-      });
     } else {
       res.send("Error in retrieving: " + JSON.stringify(err, undefined, 2));
     }
@@ -43,7 +52,6 @@ module.exports.allAdmins = (req, res) => {
 };
 
 //send messages to admin
-
 module.exports.postMessage = (req, res) => {
   var message = new Message({
     adminId: req.body.adminId,
@@ -55,6 +63,8 @@ module.exports.postMessage = (req, res) => {
     if (err) {
       console.log("add error: " + JSON.stringify(err, undefined, 2));
     } else {
+      console.log(req);
+      logdata(req, res);
       res.send(doc);
     }
   });
@@ -83,6 +93,7 @@ module.exports.postAuctionProperty = (req, res) => {
     if (err) {
       console.log("add error: " + JSON.stringify(err, undefined, 2));
     } else {
+      logdata(req, res);
       res.send(doc);
     }
   });
@@ -92,6 +103,7 @@ module.exports.removeAdmin = (req, res) => {
   Admin.findByIdAndDelete(req.params.id, (err, docs) => {
     if (docs) {
       if (!err) {
+        logdata(req, res);
         return res.send(docs);
       } else {
         return res
