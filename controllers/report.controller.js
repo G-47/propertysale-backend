@@ -1,7 +1,7 @@
 const pdf = require("pdf-creator-node");
 const fs = require("fs");
 
-var html = fs.readFileSync("../template.html", "utf8");
+var html = fs.readFileSync("./template.html", "utf8");
 
 var options = {
   format: "A3",
@@ -29,11 +29,11 @@ module.exports.create = (req, res) => {
     data: {
       desc: req.body.content,
     },
-    path: "../output.pdf",
+    path: "./output.pdf",
   };
 
   pdf.create(document, options);
-  var data = fs.readFileSync("../output.pdf");
+  var data = fs.readFileSync("./output.pdf");
   res.contentType("application/pdf");
   res.send(data);
 };
