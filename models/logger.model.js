@@ -5,8 +5,9 @@ var loggerSchema = new mongoose.Schema({
   req_ip: { type: String },
   timestamp: { type: Date },
   status_Code: { type: Number },
-  method:{type:String},
-  user_id:{type:String}
+  method: { type: String },
+  user_id: { type: String },
+  message: { type: String },
 });
 
 mongoose.model("Logger", loggerSchema);
