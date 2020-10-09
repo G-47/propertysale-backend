@@ -1,17 +1,19 @@
 const mongoose = require("mongoose");
 const Admin = mongoose.model("Admin");
+const User = mongoose.model("User");
 const Message = mongoose.model("Message");
 const NewAuction = mongoose.model("NewAuction");
 const Logger = mongoose.model("Logger");
 
-function logdata(req, res) {
+function logdata(req, res, msg) {
   var log = new Logger({
     endpoint: req.url,
     req_ip: req.connection.remoteAddress,
     timestamp: Date.now(),
     status_code: res.statusCode,
-    method:req.method,
-    user_id:req._id,
+    method: req.method,
+    user_id: req._id,
+    message: msg,
   });
   log.save((err, doc) => {
     if (err) {
@@ -21,27 +23,9 @@ function logdata(req, res) {
   });
 }
 
-//register a admin
-module.exports.registerAdmin = (req, res) => {
-  var admin = new Admin({
-    name: req.body.name,
-    email: req.body.email,
-    picture: req.body.picture,
-  });
-
-  admin.save((err, doc) => {
-    if (err) {
-      console.log("add error: " + JSON.stringify(err, undefined, 2));
-    } else {
-      logdata(req, res);
-      res.send(doc);
-    }
-  });
-};
-
 //get all  admins
 module.exports.allAdmins = (req, res) => {
-  Admin.find((err, docs) => {
+  User.find({ userType: 1 }, (err, docs, type) => {
     if (!err) {
       res.send(docs);
     } else {
@@ -64,7 +48,7 @@ module.exports.postMessage = (req, res) => {
       console.log("add error: " + JSON.stringify(err, undefined, 2));
     } else {
       console.log(req);
-      logdata(req, res);
+      logdata(req, res, "Send message by manager to : " + req.body.adminId);
       res.send(doc);
     }
   });
@@ -103,7 +87,7 @@ module.exports.removeAdmin = (req, res) => {
   Admin.findByIdAndDelete(req.params.id, (err, docs) => {
     if (docs) {
       if (!err) {
-        logdata(req, res);
+        logdata(req, res, "admin removed by manager: " + req.params.id);
         return res.send(docs);
       } else {
         return res

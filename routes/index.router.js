@@ -49,11 +49,6 @@ router.put(
 
 //MANAGER CONTROLLERS
 router.get("/getAdmins", jwtHelper.verifyJwtToken, ctrlAdmin.allAdmins);
-router.post(
-  "/registerAdmin",
-  jwtHelper.verifyJwtToken,
-  ctrlAdmin.registerAdmin
-);
 router.post("/postMessage", jwtHelper.verifyJwtToken, ctrlAdmin.postMessage);
 router.post(
   "/postAuctionProperty",

@@ -28,11 +28,6 @@ app.use((err, req, res, next) => {
   };
 });
 
-app.use((req, res, next) => {
-  console.log(req.url,req.ip,res.statusCode);
-  next();
-});
-
 app.listen(process.env.PORT, () => {
   console.log("hello");
   console.log("Express Server started at port: " + process.env.PORT);
