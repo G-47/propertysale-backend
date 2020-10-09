@@ -19,6 +19,7 @@ router.get(
   ctrlUser.getCurrentUser
 );
 router.post("/getUser", jwtHelper.verifyJwtToken, ctrlUser.getUser);
+router.post("/getUsers", jwtHelper.verifyJwtToken, ctrlUser.getUsers);
 
 // DIRECT LAND/HOUSE CONTROLLERS
 router.post("/getDirectLands", ctrlDirectLand.allDirectLands);
@@ -53,7 +54,11 @@ router.post(
   jwtHelper.verifyJwtToken,
   ctrlAdmin.postAuctionProperty
 );
-router.delete('/removeAdmin/:id',jwtHelper.verifyJwtToken,ctrlAdmin.removeAdmin);
+router.delete(
+  "/removeAdmin/:id",
+  jwtHelper.verifyJwtToken,
+  ctrlAdmin.removeAdmin
+);
 
 //EMAIL CONTROLLER
 router.post("/sendEmail", ctrlEmail.send);

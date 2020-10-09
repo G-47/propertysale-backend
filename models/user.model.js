@@ -31,6 +31,9 @@ var userSchema = new mongoose.Schema({
   userType: {
     type: Number,
   },
+  status: {
+    type: Number,
+  },
   password: {
     type: String,
   },
