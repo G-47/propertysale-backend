@@ -25,7 +25,7 @@ function logdata(req, res, msg) {
 
 //get all  admins
 module.exports.allAdmins = (req, res) => {
-  User.find({ userType: 1 }, (err, docs, type) => {
+  User.find({ userType: 1 }, (err, docs) => {
     if (!err) {
       res.send(docs);
     } else {
@@ -34,6 +34,18 @@ module.exports.allAdmins = (req, res) => {
   });
   console.log(req.url, req.ip, res.statusCode, Date.now());
 };
+
+// get activity log
+module.exports.getActivityLog = (req,res) => {
+  Logger.find((err, docs) => {
+    if (!err) {
+      res.send(docs);
+    } else {
+      res.send("Error in retrieving: " + JSON.stringify(err, undefined, 2));
+    }
+  });
+};
+
 
 //send messages to admin
 module.exports.postMessage = (req, res) => {
@@ -83,6 +95,7 @@ module.exports.postAuctionProperty = (req, res) => {
   });
 };
 
+//remove admin
 module.exports.removeAdmin = (req, res) => {
   Admin.findByIdAndDelete(req.params.id, (err, docs) => {
     if (docs) {
@@ -101,3 +114,4 @@ module.exports.removeAdmin = (req, res) => {
     }
   });
 };
+
