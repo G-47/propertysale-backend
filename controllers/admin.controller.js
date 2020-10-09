@@ -83,6 +83,7 @@ module.exports.postAuctionProperty = (req, res) => {
   });
 };
 
+//remove admin
 module.exports.removeAdmin = (req, res) => {
   Admin.findByIdAndDelete(req.params.id, (err, docs) => {
     if (docs) {
