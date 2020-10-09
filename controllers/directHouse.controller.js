@@ -52,3 +52,13 @@ module.exports.acceptDirectHouse = (req, res) => {
     }
   );
 };
+
+module.exports.getHousesByUserId = (req, res) => {
+  DirectHouse.find({ ownerId: req._id }, (err, doc) => {
+    if (!err) {
+      res.send(doc);
+    } else {
+      res.send("Error in retrieving: " + JSON.stringify(err, undefined, 2));
+    }
+  });
+};

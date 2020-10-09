@@ -33,6 +33,11 @@ router.put(
   jwtHelper.verifyJwtToken,
   ctrlDirectLand.acceptDirectLand
 );
+router.get(
+  "/getLandsByUserId",
+  jwtHelper.verifyJwtToken,
+  ctrlDirectLand.getLandsByUserId
+);
 
 router.post("/getDirectHouses", ctrlDirectHouse.allDirectHouses);
 router.post(
@@ -44,6 +49,11 @@ router.put(
   "/acceptDirectHouse",
   jwtHelper.verifyJwtToken,
   ctrlDirectHouse.acceptDirectHouse
+);
+router.get(
+  "/getHousesByUserId",
+  jwtHelper.verifyJwtToken,
+  ctrlDirectHouse.getHousesByUserId
 );
 
 //MANAGER CONTROLLERS
@@ -59,7 +69,11 @@ router.post(
   jwtHelper.verifyJwtToken,
   ctrlAdmin.postAuctionProperty
 );
-router.delete('/removeAdmin/:id',jwtHelper.verifyJwtToken,ctrlAdmin.removeAdmin);
+router.delete(
+  "/removeAdmin/:id",
+  jwtHelper.verifyJwtToken,
+  ctrlAdmin.removeAdmin
+);
 
 //EMAIL CONTROLLER
 router.post("/sendEmail", ctrlEmail.send);
