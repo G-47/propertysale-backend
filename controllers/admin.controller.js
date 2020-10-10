@@ -53,6 +53,7 @@ module.exports.postMessage = (req, res) => {
     adminId: req.body.adminId,
     name: req.body.name,
     message: req.body.message,
+    timestamp:Date.now()
   });
 
   message.save((err, doc) => {
