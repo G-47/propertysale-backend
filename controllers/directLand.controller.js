@@ -52,3 +52,13 @@ module.exports.acceptDirectLand = (req, res) => {
     }
   );
 };
+
+module.exports.getLandsByUserId = (req, res) => {
+  DirectLand.find({ ownerId: req._id }, (err, doc) => {
+    if (!err) {
+      res.send(doc);
+    } else {
+      res.send("Error in retrieving: " + JSON.stringify(err, undefined, 2));
+    }
+  });
+};
