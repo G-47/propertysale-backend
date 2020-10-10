@@ -1,13 +1,10 @@
 const mongoose = require("mongoose");
-const Bidding = mongoose.model("Bidding");
+const User_bidding = mongoose.model("User_bidding");
 
-module.exports.insertBid = (req, res) => {
+module.exports.insertData = (req, res) => {
     var bidding = new Bidding({
       adID: req.body.adID,
-      userID: req.body.userID,
-      biddingAmount: req.body.biddingAmount,
-      type: req.body.type,      
-      postedTime: Date.now()
+      userID: req.body.userID
     });
   
     bidding.save((err, doc) => {
@@ -19,8 +16,8 @@ module.exports.insertBid = (req, res) => {
     });
   };
   
-  module.exports.getAllBiddings = (req, res) => {
-    Bidding.find({adID: "5f7dd2e3ee91c544beb255bd"},(err, docs) => {
+  module.exports.getData = (req, res) => {
+    Bidding.find({adID: req.body.adID, userID: req.body.userID},(err, docs) => {
       if (!err) {
         res.send(docs);
       } else {

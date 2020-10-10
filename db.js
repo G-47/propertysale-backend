@@ -12,3 +12,4 @@ require('./models/user.model');
 require('./models/admin.model');
 require('./models/auctionLandAd.model');
 require('./models/bidding.model');
+require('./models/user_bidding.model');
