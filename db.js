@@ -13,3 +13,8 @@ require('./models/admin.model');
 require('./models/auctionLandAd.model');
 require('./models/bidding.model');
 require('./models/user_bidding.model');
+require('./models/message.model');
+require('./models/newAuctionProperty.model');
+require('./models/directLand.model');
+require('./models/directHouse.model');
+require('./models/logger.model');
