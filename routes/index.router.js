@@ -14,12 +14,11 @@ const { verify } = require("jsonwebtoken");
 // USER CONTROLLERS
 router.post("/registerUser", ctrlUser.register);
 router.post("/authenticateUser", ctrlUser.authenticate);
-router.get(
-  "/getCurrentUser",
-  jwtHelper.verifyJwtToken,
-  ctrlUser.getCurrentUser
-);
+router.get("/getCurrentUser",jwtHelper.verifyJwtToken,ctrlUser.getCurrentUser);
 router.post("/getUser", jwtHelper.verifyJwtToken, ctrlUser.getUser);
+router.post("/getUsers", jwtHelper.verifyJwtToken, ctrlUser.getUsers);
+router.post("/approveUser", jwtHelper.verifyJwtToken, ctrlUser.approveUser);
+
 
 // DIRECT LAND/HOUSE CONTROLLERS
 router.post("/getDirectLands", ctrlDirectLand.allDirectLands);
@@ -56,13 +55,9 @@ router.get(
   ctrlDirectHouse.getHousesByUserId
 );
 
+
 //MANAGER CONTROLLERS
 router.get("/getAdmins", jwtHelper.verifyJwtToken, ctrlAdmin.allAdmins);
-router.post(
-  "/registerAdmin",
-  jwtHelper.verifyJwtToken,
-  ctrlAdmin.registerAdmin
-);
 router.post("/postMessage", jwtHelper.verifyJwtToken, ctrlAdmin.postMessage);
 router.post(
   "/postAuctionProperty",
@@ -74,6 +69,7 @@ router.delete(
   jwtHelper.verifyJwtToken,
   ctrlAdmin.removeAdmin
 );
+router.get("/getActivityLog",jwtHelper.verifyJwtToken,ctrlAdmin.getActivityLog);
 
 //EMAIL CONTROLLER
 router.post("/sendEmail", ctrlEmail.send);

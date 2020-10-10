@@ -1,28 +1,43 @@
 const mongoose = require("mongoose");
 const Admin = mongoose.model("Admin");
+const User = mongoose.model("User");
 const Message = mongoose.model("Message");
 const NewAuction = mongoose.model("NewAuction");
+const Logger = mongoose.model("Logger");
 
-//register a admin
-module.exports.registerAdmin = (req, res) => {
-  var admin = new Admin({
-    name: req.body.name,
-    email: req.body.email,
-    picture: req.body.picture,
+function logdata(req, res, msg) {
+  var log = new Logger({
+    endpoint: req.url,
+    req_ip: req.connection.remoteAddress,
+    timestamp: Date.now(),
+    status_code: res.statusCode,
+    method: req.method,
+    user_id: req._id,
+    message: msg,
   });
-
-  admin.save((err, doc) => {
+  log.save((err, doc) => {
     if (err) {
-      console.log("add error: " + JSON.stringify(err, undefined, 2));
-    } else {
       res.send(doc);
+    } else {
     }
   });
-};
+}
 
 //get all  admins
 module.exports.allAdmins = (req, res) => {
-  Admin.find((err, docs) => {
+  User.find({ userType: 1 }, (err, docs) => {
+    if (!err) {
+      res.send(docs);
+    } else {
+      res.send("Error in retrieving: " + JSON.stringify(err, undefined, 2));
+    }
+  });
+  console.log(req.url, req.ip, res.statusCode, Date.now());
+};
+
+// get activity log
+module.exports.getActivityLog = (req,res) => {
+  Logger.find((err, docs) => {
     if (!err) {
       res.send(docs);
     } else {
@@ -31,8 +46,8 @@ module.exports.allAdmins = (req, res) => {
   });
 };
 
-//send messages to admin
 
+//send messages to admin
 module.exports.postMessage = (req, res) => {
   var message = new Message({
     adminId: req.body.adminId,
@@ -44,6 +59,8 @@ module.exports.postMessage = (req, res) => {
     if (err) {
       console.log("add error: " + JSON.stringify(err, undefined, 2));
     } else {
+      console.log(req);
+      logdata(req, res, "Send message by manager to : " + req.body.adminId);
       res.send(doc);
     }
   });
@@ -72,15 +89,18 @@ module.exports.postAuctionProperty = (req, res) => {
     if (err) {
       console.log("add error: " + JSON.stringify(err, undefined, 2));
     } else {
+      logdata(req, res);
       res.send(doc);
     }
   });
 };
 
+//remove admin
 module.exports.removeAdmin = (req, res) => {
   Admin.findByIdAndDelete(req.params.id, (err, docs) => {
     if (docs) {
       if (!err) {
+        logdata(req, res, "admin removed by manager: " + req.params.id);
         return res.send(docs);
       } else {
         return res
@@ -92,5 +112,6 @@ module.exports.removeAdmin = (req, res) => {
         .status(404)
         .json({ status: false, message: "not found admin" });
     }
-  })
-}
+  });
+};
+

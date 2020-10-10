@@ -25,9 +25,10 @@ app.use((err, req, res, next) => {
       valErrors.push(err.errors[key].message)
     );
     res.status(422).send(valErrors);
-  }
+  };
 });
 
 app.listen(process.env.PORT, () => {
+  console.log("hello");
   console.log("Express Server started at port: " + process.env.PORT);
 });

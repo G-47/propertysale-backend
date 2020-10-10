@@ -19,8 +19,6 @@ const nodemailer = require("nodemailer");
 // });
 
 module.exports.send = (req, res) => {
-  console.log("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
-
   let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {

@@ -27,7 +27,7 @@ module.exports.addDirectHouse = (req, res) => {
 };
 
 module.exports.allDirectHouses = (req, res) => {
-  directHouse.find({ status: req.body.status }, (err, docs) => {
+  DirectHouse.find({ status: req.body.status }, (err, docs) => {
     if (!err) {
       res.send(docs);
     } else {
