@@ -62,3 +62,13 @@ module.exports.getLandsByUserId = (req, res) => {
     }
   });
 };
+
+module.exports.getLandById = (req, res) => {
+  DirectLand.findById(req.body.id, (err, doc) => {
+    if (!err) {
+      res.send(doc);
+    } else {
+      res.send("Error in retrieving: " + JSON.stringify(err, undefined, 2));
+    }
+  });
+};
