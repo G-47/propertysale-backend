@@ -31,11 +31,15 @@ module.exports.getData = (req, res) => {
 };
 
 module.exports.getBidedPropertyIds = (req, res) => {
-  User_bidding.find({ userID: req._id, type: req.body.type }, (err, docs) => {
-    if (!err) {
-      res.send(docs);
-    } else {
-      res.send("Error in retrieving: " + JSON.stringify(err, undefined, 2));
+  User_bidding.find(
+    { userID: req._id, type: req.body.type },
+    { adID: 1, _id: 0 },
+    (err, docs) => {
+      if (!err) {
+        res.send(docs);
+      } else {
+        res.send("Error in retrieving: " + JSON.stringify(err, undefined, 2));
+      }
     }
-  });
+  );
 };

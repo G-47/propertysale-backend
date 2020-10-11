@@ -97,10 +97,12 @@ router.post("/report", ctrlReport.create);
 //AUCTION LAND ADS CONTROLLERS
 router.post("/addAuctionLandAd", ctrlAuctionLandAd.insertAuctionLandAd);
 router.get("/getAllLandAds", ctrlAuctionLandAd.allAuctionLandAds);
+router.post("/getBidedLands", ctrlAuctionLandAd.getBidedLands);
 
 //AUCTION HOUSE ADS CONTROLLER
 router.post("/addAuctionHouseAd", ctrlAuctionHouseAd.insertAuctionHouseAd);
 router.get("/getAllHouseAds", ctrlAuctionHouseAd.allAuctionHouseAds);
+router.post("/getBidedHouses", ctrlAuctionHouseAd.getBidedHouses);
 
 //BIDDING CONTROLLER
 router.post("/insertBid", ctrlBidding.insertBid);
