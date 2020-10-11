@@ -19,7 +19,7 @@ router.get(
   jwtHelper.verifyJwtToken,
   ctrlUser.getCurrentUser
 );
-router.post("/getUser", jwtHelper.verifyJwtToken, ctrlUser.getUser);
+router.post("/getUser", ctrlUser.getUser);
 router.post("/getUsers", jwtHelper.verifyJwtToken, ctrlUser.getUsers);
 router.post("/approveUser", jwtHelper.verifyJwtToken, ctrlUser.approveUser);
 
@@ -66,6 +66,8 @@ router.post("/getHouseById", ctrlDirectHouse.getHouseById);
 //MANAGER CONTROLLERS
 router.get("/getAdmins", jwtHelper.verifyJwtToken, ctrlAdmin.allAdmins);
 router.post("/postMessage", jwtHelper.verifyJwtToken, ctrlAdmin.postMessage);
+router.get("/getMessages", jwtHelper.verifyJwtToken, ctrlAdmin.getMessages);
+
 router.post(
   "/postAuctionProperty",
   jwtHelper.verifyJwtToken,
@@ -86,6 +88,6 @@ router.get(
 router.post("/sendEmail", ctrlEmail.send);
 
 //REPORT CONTROLLER
-router.post("/report", jwtHelper.verifyJwtToken, ctrlReport.create);
+router.post("/report", ctrlReport.create);
 
 module.exports = router;
