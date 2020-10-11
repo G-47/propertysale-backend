@@ -3,17 +3,15 @@ const router = express.Router();
 
 const ctrlUser = require("../controllers/user.controller");
 const ctrlAdmin = require("../controllers/admin.controller");
-<<<<<<< HEAD
 const ctrlBidding = require("../controllers/bidding.controller");
 const ctrlUser_Bidding = require("../controllers/user_bidding.controller");
 const ctrlAuctionLandAd = require("../controllers/auctionLandAd.controller");
-=======
+const ctrlAuctionHouseAd = require("../controllers/auctionHouseAd.controller");
 const ctrlDirectLand = require("../controllers/directLand.controller");
 const ctrlDirectHouse = require("../controllers/directHouse.controller");
 const ctrlEmail = require("../controllers/email.controller");
 const ctrlReport = require("../controllers/report.controller");
 
->>>>>>> 5ca45e40052e21c2af30a41ec97ec5d7e98e0faa
 const jwtHelper = require("../config/jwtHelper");
 const { verify } = require("jsonwebtoken");
 
@@ -83,15 +81,19 @@ router.post("/sendEmail", ctrlEmail.send);
 //REPORT CONTROLLER
 router.post("/report", jwtHelper.verifyJwtToken, ctrlReport.create);
 
-//AUCTION ADS CONTROLLERS
+//AUCTION LAND ADS CONTROLLERS
 router.post("/addAuctionLandAd",ctrlAuctionLandAd.insertAuctionLandAd);
 router.get("/getAllLandAds",ctrlAuctionLandAd.allAuctionLandAds);
 
-//BIDDING
+//AUCTION HOUSE ADS CONTROLLER
+router.post("/addAuctionHouseAd",ctrlAuctionHouseAd.insertAuctionHouseAd);
+router.get("/getAllHouseAds",ctrlAuctionHouseAd.allAuctionHouseAds);
+
+//BIDDING CONTROLLER
 router.post("/insertBid",ctrlBidding.insertBid);
 router.post("/getAllBids",ctrlBidding.getAllBiddings);
 
-//USER_BIDDING
+//USER_BIDDING CONTROLLER
 router.post("/insertData",ctrlUser_Bidding.insertData);
 router.post("/getData",ctrlUser_Bidding.getData);
 

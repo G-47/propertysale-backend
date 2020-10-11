@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
 
-var auctionLandAdSchema = new mongoose.Schema({
+var auctionHouseAdSchema = new mongoose.Schema({
     title:{type:String},
-    type:{type:String},
-    size:{type:String},
     description:{type:String},
-    threeSixtyImageUrl:{type:String},
+    bedRooms:{type:Number},
+    bathRooms:{type:Number},
     images:{type:Array},
     locationName: {type: String},
     locationMap:{type:Object},
@@ -15,4 +14,4 @@ var auctionLandAdSchema = new mongoose.Schema({
     postedTime:{type:Number}
 });
 
-mongoose.model('AuctionLandAd',auctionLandAdSchema);
+mongoose.model('AuctionHouseAd',auctionHouseAdSchema);
