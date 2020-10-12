@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Bidding = mongoose.model("Bidding");
+const Logger = mongoose.model("Logger");
 
 function logdata(req, res, msg) {
   var log = new Logger({

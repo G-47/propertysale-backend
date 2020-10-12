@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const DirectHouse = mongoose.model("DirectHouse");
+const Logger = mongoose.model("Logger");
 
 function logdata(req, res, msg) {
   var log = new Logger({

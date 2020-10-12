@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const AuctionHouseAd = mongoose.model("AuctionHouseAd");
+const Logger = mongoose.model("Logger");
 console.log(Date.now());
 
 function logdata(req, res, msg) {
@@ -40,7 +41,7 @@ module.exports.insertAuctionHouseAd = (req, res) => {
       console.log("insert error: " + JSON.stringify(err, undefined, 2));
     } else {
       res.send(doc);
-      logdata(req,res,"Inserted ad for auction by :" + req.user_id);
+      logdata(req, res, "Inserted ad for auction by :" + req.user_id);
     }
   });
 };
@@ -69,6 +70,13 @@ module.exports.getEndedHouseBids = (req, res) => {
   AuctionHouseAd.find({ endDate: { $lt: Date.now() } }, (err, docs) => {
     if (!err) {
       res.send(docs);
+    }
+  });
+};
+module.exports.getAuctionHouseById = (req, res) => {
+  AuctionHouseAd.findById(req.body.id, (err, doc) => {
+    if (!err) {
+      res.send(doc);
     } else {
       res.send("Error in retrieving: " + JSON.stringify(err, undefined, 2));
     }

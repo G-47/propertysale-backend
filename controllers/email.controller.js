@@ -2,7 +2,9 @@
 // const bodyParser = require("body-parser");
 // const exhbs = require("express-handlebars");
 // const path = require("path");
+const mongoose = require("mongoose");
 const nodemailer = require("nodemailer");
+const Logger = mongoose.model("Logger");
 
 function logdata(req, res, msg) {
   var log = new Logger({

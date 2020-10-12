@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const User = mongoose.model("User");
 const passport = require("passport");
+const Logger = mongoose.model("Logger");
 
 function logdata(req, res, msg) {
   var log = new Logger({
