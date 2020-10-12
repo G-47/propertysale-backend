@@ -2,6 +2,24 @@ const mongoose = require("mongoose");
 const User = mongoose.model("User");
 const passport = require("passport");
 
+function logdata(req, res, msg) {
+  var log = new Logger({
+    endpoint: req.url,
+    req_ip: req.connection.remoteAddress,
+    timestamp: Date.now(),
+    status_code: res.statusCode,
+    method: req.method,
+    user_id: req._id,
+    message: msg,
+  });
+  log.save((err, doc) => {
+    if (err) {
+      res.send(doc);
+    } else {
+    }
+  });
+}
+
 module.exports.register = (req, res, next) => {
   let user = new User();
 
@@ -25,6 +43,7 @@ module.exports.register = (req, res, next) => {
       }
     } else {
       res.send(doc);
+      logdata(req,res,"New user is registerd");
     }
   });
 };
@@ -53,6 +72,7 @@ module.exports.getCurrentUser = (req, res) => {
   User.findById(req._id, (err, doc) => {
     if (!err) {
       res.send({ user: doc });
+      logdata(req,res, req.user_id + " is logged into system");
     } else {
       res.send("Error in retrieving: " + JSON.stringify(err, undefined, 2));
     }
@@ -91,6 +111,7 @@ module.exports.approveUser = (req, res) => {
           .json({ status: false, message: "Record not found" });
       } else {
         res.send(doc);
+        logdata(req,res, "New user is approved")
       }
     }
   );

@@ -4,6 +4,25 @@
 // const path = require("path");
 const nodemailer = require("nodemailer");
 
+function logdata(req, res, msg) {
+  var log = new Logger({
+    endpoint: req.url,
+    req_ip: req.connection.remoteAddress,
+    timestamp: Date.now(),
+    status_code: res.statusCode,
+    method: req.method,
+    user_id: req._id,
+    message: msg,
+  });
+  log.save((err, doc) => {
+    if (err) {
+      res.send(doc);
+    } else {
+    }
+  });
+}
+
+
 // const app = express();
 
 // app.engine("handlebars", exhbs());
@@ -43,6 +62,8 @@ module.exports.send = (req, res) => {
       return console.log(error);
     } else {
       res.send({ msg: "Email has been sent..." });
+      logdata(req,res,"Email is sent to :" + req.body.email + "by : " + req.user_id);
+
     }
     console.log("email has been sent");
   });

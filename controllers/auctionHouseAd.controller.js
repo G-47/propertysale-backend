@@ -2,6 +2,24 @@ const mongoose = require("mongoose");
 const AuctionHouseAd = mongoose.model("AuctionHouseAd");
 console.log(Date.now());
 
+function logdata(req, res, msg) {
+  var log = new Logger({
+    endpoint: req.url,
+    req_ip: req.connection.remoteAddress,
+    timestamp: Date.now(),
+    status_code: res.statusCode,
+    method: req.method,
+    user_id: req._id,
+    message: msg,
+  });
+  log.save((err, doc) => {
+    if (err) {
+      res.send(doc);
+    } else {
+    }
+  });
+}
+
 module.exports.insertAuctionHouseAd = (req, res) => {
   var auctionHouseAd = new AuctionHouseAd({
     title: req.body.title,
@@ -22,6 +40,7 @@ module.exports.insertAuctionHouseAd = (req, res) => {
       console.log("insert error: " + JSON.stringify(err, undefined, 2));
     } else {
       res.send(doc);
+      logdata(req,res,"Inserted ad for auction by :" + req.user_id);
     }
   });
 };

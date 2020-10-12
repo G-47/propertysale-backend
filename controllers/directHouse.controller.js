@@ -1,6 +1,24 @@
 const mongoose = require("mongoose");
 const DirectHouse = mongoose.model("DirectHouse");
 
+function logdata(req, res, msg) {
+  var log = new Logger({
+    endpoint: req.url,
+    req_ip: req.connection.remoteAddress,
+    timestamp: Date.now(),
+    status_code: res.statusCode,
+    method: req.method,
+    user_id: req._id,
+    message: msg,
+  });
+  log.save((err, doc) => {
+    if (err) {
+      res.send(doc);
+    } else {
+    }
+  });
+}
+
 module.exports.addDirectHouse = (req, res) => {
   var directHouse = new DirectHouse({
     title: req.body.title,
@@ -22,6 +40,7 @@ module.exports.addDirectHouse = (req, res) => {
       console.log("add error: " + JSON.stringify(err, undefined, 2));
     } else {
       res.send(doc);
+      logdata(req,res,"Inserted direct sale ad by :" + req.user_id);
     }
   });
 };
@@ -48,6 +67,7 @@ module.exports.acceptDirectHouse = (req, res) => {
           .json({ status: false, message: "Record not found" });
       } else {
         res.send(doc);
+        logdata(req,res,"Approved direct sale by :" + req.user_id);
       }
     }
   );

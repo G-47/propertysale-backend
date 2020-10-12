@@ -1,6 +1,24 @@
 const mongoose = require("mongoose");
 const Bidding = mongoose.model("Bidding");
 
+function logdata(req, res, msg) {
+  var log = new Logger({
+    endpoint: req.url,
+    req_ip: req.connection.remoteAddress,
+    timestamp: Date.now(),
+    status_code: res.statusCode,
+    method: req.method,
+    user_id: req._id,
+    message: msg,
+  });
+  log.save((err, doc) => {
+    if (err) {
+      res.send(doc);
+    } else {
+    }
+  });
+}
+
 module.exports.insertBid = (req, res) => {
     var bidding = new Bidding({
       adID: req.body.adID,
@@ -15,6 +33,7 @@ module.exports.insertBid = (req, res) => {
         console.log("insert error: " + JSON.stringify(err, undefined, 2));
       } else {
         res.send(doc);
+        logdata(req,res,"New bid inserted by :" + req.body.userID);
       }
     });
   };
