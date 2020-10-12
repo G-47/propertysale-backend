@@ -45,3 +45,13 @@ module.exports.getBidedHouses = (req, res) => {
     }
   });
 };
+
+module.exports.getEndedHouseBids = (req, res) => {
+  AuctionHouseAd.find({ endDate: { $lt: Date.now() } }, (err, docs) => {
+    if (!err) {
+      res.send(docs);
+    } else {
+      res.send("Error in retrieving: " + JSON.stringify(err, undefined, 2));
+    }
+  });
+};

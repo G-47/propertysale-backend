@@ -39,7 +39,21 @@ module.exports.allAuctionLandAds = (req, res) => {
 };
 
 module.exports.getBidedLands = (req, res) => {
+  console.log("xxxxxxxxxxxxxx");
+  console.log(req.body);
   AuctionLandAd.find({ _id: { $in: req.body.ids } }, (err, docs) => {
+    if (!err) {
+      res.send(docs);
+      console.log(docs);
+    } else {
+      console.log("error");
+      res.send("Error in retrieving: " + JSON.stringify(err, undefined, 2));
+    }
+  });
+};
+
+module.exports.getEndedLandBids = (req, res) => {
+  AuctionLandAd.find({ endDate: { $lt: Date.now() } }, (err, docs) => {
     if (!err) {
       res.send(docs);
     } else {
