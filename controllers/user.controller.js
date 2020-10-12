@@ -95,3 +95,25 @@ module.exports.approveUser = (req, res) => {
     }
   );
 };
+
+module.exports.updateUser = (req, res) => {
+  User.findByIdAndUpdate(
+    req._id,
+    {
+      profilePicture: req.body.profilePicture,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      mobileNumber: req.body.mobileNumber,
+    },
+    { new: true },
+    (err, doc) => {
+      if (err) {
+        return res
+          .status(404)
+          .json({ status: false, message: "Record not found" });
+      } else {
+        res.send(doc);
+      }
+    }
+  );
+};

@@ -26,6 +26,7 @@ router.get(
 router.post("/getUser", ctrlUser.getUser);
 router.post("/getUsers", jwtHelper.verifyJwtToken, ctrlUser.getUsers);
 router.post("/approveUser", jwtHelper.verifyJwtToken, ctrlUser.approveUser);
+router.put("/updateUser", jwtHelper.verifyJwtToken, ctrlUser.updateUser);
 
 // DIRECT LAND/HOUSE CONTROLLERS
 
