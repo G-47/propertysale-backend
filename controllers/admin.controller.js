@@ -36,7 +36,7 @@ module.exports.allAdmins = (req, res) => {
 };
 
 // get activity log
-module.exports.getActivityLog = (req,res) => {
+module.exports.getActivityLog = (req, res) => {
   Logger.find((err, docs) => {
     if (!err) {
       res.send(docs);
@@ -46,13 +46,13 @@ module.exports.getActivityLog = (req,res) => {
   });
 };
 
-
 //send messages to admin
 module.exports.postMessage = (req, res) => {
   var message = new Message({
     adminId: req.body.adminId,
     name: req.body.name,
     message: req.body.message,
+    timestamp: Date.now(),
   });
 
   message.save((err, doc) => {
@@ -62,6 +62,16 @@ module.exports.postMessage = (req, res) => {
       console.log(req);
       logdata(req, res, "Send message by manager to : " + req.body.adminId);
       res.send(doc);
+    }
+  });
+};
+
+module.exports.getMessages = (req, res) => {
+  Message.find({ adminId: req._id }, (err, docs) => {
+    if (!err) {
+      res.send(docs);
+    } else {
+      res.send("Error in retrieving: " + JSON.stringify(err, undefined, 2));
     }
   });
 };
@@ -114,4 +124,3 @@ module.exports.removeAdmin = (req, res) => {
     }
   });
 };
-

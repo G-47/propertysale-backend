@@ -18,13 +18,18 @@ const { verify } = require("jsonwebtoken");
 // USER CONTROLLERS
 router.post("/registerUser", ctrlUser.register);
 router.post("/authenticateUser", ctrlUser.authenticate);
-router.get("/getCurrentUser",jwtHelper.verifyJwtToken,ctrlUser.getCurrentUser);
-router.post("/getUser", jwtHelper.verifyJwtToken, ctrlUser.getUser);
+router.get(
+  "/getCurrentUser",
+  jwtHelper.verifyJwtToken,
+  ctrlUser.getCurrentUser
+);
+router.post("/getUser", ctrlUser.getUser);
 router.post("/getUsers", jwtHelper.verifyJwtToken, ctrlUser.getUsers);
 router.post("/approveUser", jwtHelper.verifyJwtToken, ctrlUser.approveUser);
 
-
 // DIRECT LAND/HOUSE CONTROLLERS
+
+//LAND
 router.post("/getDirectLands", ctrlDirectLand.allDirectLands);
 router.post(
   "/addDirectLand",
@@ -41,7 +46,9 @@ router.get(
   jwtHelper.verifyJwtToken,
   ctrlDirectLand.getLandsByUserId
 );
+router.post("/getLandById", ctrlDirectLand.getLandById);
 
+//HOUSE
 router.post("/getDirectHouses", ctrlDirectHouse.allDirectHouses);
 router.post(
   "/addDirectHouse",
@@ -58,11 +65,13 @@ router.get(
   jwtHelper.verifyJwtToken,
   ctrlDirectHouse.getHousesByUserId
 );
-
+router.post("/getHouseById", ctrlDirectHouse.getHouseById);
 
 //MANAGER CONTROLLERS
 router.get("/getAdmins", jwtHelper.verifyJwtToken, ctrlAdmin.allAdmins);
 router.post("/postMessage", jwtHelper.verifyJwtToken, ctrlAdmin.postMessage);
+router.get("/getMessages", jwtHelper.verifyJwtToken, ctrlAdmin.getMessages);
+
 router.post(
   "/postAuctionProperty",
   jwtHelper.verifyJwtToken,
@@ -73,21 +82,27 @@ router.delete(
   jwtHelper.verifyJwtToken,
   ctrlAdmin.removeAdmin
 );
-router.get("/getActivityLog",jwtHelper.verifyJwtToken,ctrlAdmin.getActivityLog);
+router.get(
+  "/getActivityLog",
+  jwtHelper.verifyJwtToken,
+  ctrlAdmin.getActivityLog
+);
 
 //EMAIL CONTROLLER
 router.post("/sendEmail", ctrlEmail.send);
 
 //REPORT CONTROLLER
-router.post("/report", jwtHelper.verifyJwtToken, ctrlReport.create);
+router.post("/report", ctrlReport.create);
 
 //AUCTION LAND ADS CONTROLLERS
 router.post("/addAuctionLandAd",jwtHelper.verifyJwtToken,ctrlAuctionLandAd.insertAuctionLandAd);
 router.get("/getAllLandAds",jwtHelper.verifyJwtToken,ctrlAuctionLandAd.allAuctionLandAds);
+router.post("/getBidedLands", ctrlAuctionLandAd.getBidedLands);
 
 //AUCTION HOUSE ADS CONTROLLER
 router.post("/addAuctionHouseAd",jwtHelper.verifyJwtToken,ctrlAuctionHouseAd.insertAuctionHouseAd);
 router.get("/getAllHouseAds",jwtHelper.verifyJwtToken,ctrlAuctionHouseAd.allAuctionHouseAds);
+router.post("/getBidedHouses", ctrlAuctionHouseAd.getBidedHouses);
 
 //BIDDING CONTROLLER
 router.post("/insertBid",jwtHelper.verifyJwtToken,ctrlBidding.insertBid);
@@ -96,5 +111,10 @@ router.post("/getAllBids",jwtHelper.verifyJwtToken,ctrlBidding.getAllBiddings);
 //USER_BIDDING CONTROLLER
 router.post("/insertData",jwtHelper.verifyJwtToken,ctrlUser_Bidding.insertData);
 router.post("/getData",jwtHelper.verifyJwtToken,ctrlUser_Bidding.getData);
+router.post(
+  "/getBidedPropertyIds",
+  jwtHelper.verifyJwtToken,
+  ctrlUser_Bidding.getBidedPropertyIds
+);
 
 module.exports = router;

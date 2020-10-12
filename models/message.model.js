@@ -1,9 +1,10 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 var messageSchema = new mongoose.Schema({
-    adminId:{type:String},
-    name:{type:String},
-    message:{type:String},
+  adminId: { type: String },
+  name: { type: String },
+  message: { type: String },
+  timestamp: { type: Number },
 });
 
-mongoose.model('Message',messageSchema);
+mongoose.model("Message", messageSchema);
