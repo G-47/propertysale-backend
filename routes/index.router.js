@@ -95,22 +95,22 @@ router.post("/sendEmail", ctrlEmail.send);
 router.post("/report", ctrlReport.create);
 
 //AUCTION LAND ADS CONTROLLERS
-router.post("/addAuctionLandAd", ctrlAuctionLandAd.insertAuctionLandAd);
-router.get("/getAllLandAds", ctrlAuctionLandAd.allAuctionLandAds);
+router.post("/addAuctionLandAd",jwtHelper.verifyJwtToken,ctrlAuctionLandAd.insertAuctionLandAd);
+router.get("/getAllLandAds",jwtHelper.verifyJwtToken,ctrlAuctionLandAd.allAuctionLandAds);
 router.post("/getBidedLands", ctrlAuctionLandAd.getBidedLands);
 
 //AUCTION HOUSE ADS CONTROLLER
-router.post("/addAuctionHouseAd", ctrlAuctionHouseAd.insertAuctionHouseAd);
-router.get("/getAllHouseAds", ctrlAuctionHouseAd.allAuctionHouseAds);
+router.post("/addAuctionHouseAd",jwtHelper.verifyJwtToken,ctrlAuctionHouseAd.insertAuctionHouseAd);
+router.get("/getAllHouseAds",jwtHelper.verifyJwtToken,ctrlAuctionHouseAd.allAuctionHouseAds);
 router.post("/getBidedHouses", ctrlAuctionHouseAd.getBidedHouses);
 
 //BIDDING CONTROLLER
-router.post("/insertBid", ctrlBidding.insertBid);
-router.post("/getAllBids", ctrlBidding.getAllBiddings);
+router.post("/insertBid",jwtHelper.verifyJwtToken,ctrlBidding.insertBid);
+router.post("/getAllBids",jwtHelper.verifyJwtToken,ctrlBidding.getAllBiddings);
 
 //USER_BIDDING CONTROLLER
-router.post("/insertData", ctrlUser_Bidding.insertData);
-router.post("/getData", ctrlUser_Bidding.getData);
+router.post("/insertData",jwtHelper.verifyJwtToken,ctrlUser_Bidding.insertData);
+router.post("/getData",jwtHelper.verifyJwtToken,ctrlUser_Bidding.getData);
 router.post(
   "/getBidedPropertyIds",
   jwtHelper.verifyJwtToken,
