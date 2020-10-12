@@ -20,7 +20,7 @@ module.exports.insertBid = (req, res) => {
   };
   
   module.exports.getAllBiddings = (req, res) => {
-    Bidding.find({adID: "5f7dd2e3ee91c544beb255bd"},(err, docs) => {
+    Bidding.find({adID: req.body.adID},(err, docs) => {
       if (!err) {
         res.send(docs);
       } else {
