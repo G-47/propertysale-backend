@@ -104,8 +104,6 @@ module.exports.updateUser = (req, res) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       mobileNumber: req.body.mobileNumber,
-      email: req.body.email,
-      nicNumber: req.body.nic,
     },
     { new: true },
     (err, doc) => {
