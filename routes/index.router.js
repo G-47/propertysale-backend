@@ -48,6 +48,7 @@ router.get(
   ctrlDirectLand.getLandsByUserId
 );
 router.post("/getLandById", ctrlDirectLand.getLandById);
+router.delete("/deleteLand/:id", ctrlDirectLand.deleteById);
 
 //HOUSE
 router.post("/getDirectHouses", ctrlDirectHouse.allDirectHouses);
@@ -67,6 +68,7 @@ router.get(
   ctrlDirectHouse.getHousesByUserId
 );
 router.post("/getHouseById", ctrlDirectHouse.getHouseById);
+router.delete("/deleteHouse/:id", ctrlDirectHouse.deleteById);
 
 //MANAGER CONTROLLERS
 router.get("/getAdmins", jwtHelper.verifyJwtToken, ctrlAdmin.allAdmins);

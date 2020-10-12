@@ -93,3 +93,19 @@ module.exports.getLandById = (req, res) => {
     }
   });
 };
+
+module.exports.deleteById = (req, res) => {
+  DirectLand.findByIdAndDelete(req.params.id, (err, docs) => {
+    if (docs) {
+      if (!err) {
+        return res.send(docs);
+      } else {
+        return res
+          .status(404)
+          .json({ status: false, message: "not found land" });
+      }
+    } else {
+      return res.status(404).json({ status: false, message: "not found land" });
+    }
+  });
+};
