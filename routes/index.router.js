@@ -103,6 +103,7 @@ router.post(
 );
 router.get("/getAllLandAds", ctrlAuctionLandAd.allAuctionLandAds);
 router.post("/getBidedLands", ctrlAuctionLandAd.getBidedLands);
+router.post("/getAuctionLandAdById", ctrlAuctionLandAd.getAuctionLandById)
 
 //AUCTION HOUSE ADS CONTROLLER
 router.post(
@@ -112,6 +113,7 @@ router.post(
 );
 router.get("/getAllHouseAds", ctrlAuctionHouseAd.allAuctionHouseAds);
 router.post("/getBidedHouses", ctrlAuctionHouseAd.getBidedHouses);
+router.post("/getAuctionHouseAdById", ctrlAuctionHouseAd.getAuctionHouseById);
 
 //BIDDING CONTROLLER
 router.post("/insertBid", jwtHelper.verifyJwtToken, ctrlBidding.insertBid);

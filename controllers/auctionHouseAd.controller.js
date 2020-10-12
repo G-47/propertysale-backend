@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const AuctionHouseAd = mongoose.model("AuctionHouseAd");
+const Logger = mongoose.model("Logger");
 console.log(Date.now());
 
 function logdata(req, res, msg) {
@@ -59,6 +60,16 @@ module.exports.getBidedHouses = (req, res) => {
   AuctionHouseAd.find({ _id: { $in: req.body.ids } }, (err, docs) => {
     if (!err) {
       res.send(docs);
+    } else {
+      res.send("Error in retrieving: " + JSON.stringify(err, undefined, 2));
+    }
+  });
+};
+
+module.exports.getAuctionHouseById = (req, res) => {
+  AuctionHouseAd  .findById(req.body.id, (err, doc) => {
+    if (!err) {
+      res.send(doc);
     } else {
       res.send("Error in retrieving: " + JSON.stringify(err, undefined, 2));
     }
