@@ -41,7 +41,7 @@ module.exports.addDirectHouse = (req, res) => {
       console.log("add error: " + JSON.stringify(err, undefined, 2));
     } else {
       res.send(doc);
-      logdata(req,res,"Inserted direct sale ad by :" + req.user_id);
+      logdata(req, res, "Inserted direct sale ad by :" + req.user_id);
     }
   });
 };
@@ -56,10 +56,10 @@ module.exports.allDirectHouses = (req, res) => {
   });
 };
 
-module.exports.acceptDirectHouse = (req, res) => {
+module.exports.acceptOrDeleteDirectHouse = (req, res) => {
   DirectHouse.findByIdAndUpdate(
     req.body.id,
-    { status: 1 },
+    { status: req.body.status },
     { new: true },
     (err, doc) => {
       if (err) {
@@ -68,14 +68,14 @@ module.exports.acceptDirectHouse = (req, res) => {
           .json({ status: false, message: "Record not found" });
       } else {
         res.send(doc);
-        logdata(req,res,"Approved direct sale by :" + req.user_id);
+        logdata(req, res, "Approved direct sale by :" + req.user_id);
       }
     }
   );
 };
 
 module.exports.getHousesByUserId = (req, res) => {
-  DirectHouse.find({ ownerId: req._id }, (err, doc) => {
+  DirectHouse.find({ ownerId: req._id, status: 1 }, (err, doc) => {
     if (!err) {
       res.send(doc);
     } else {

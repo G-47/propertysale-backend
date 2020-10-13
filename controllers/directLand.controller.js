@@ -41,7 +41,7 @@ module.exports.addDirectLand = (req, res) => {
       console.log("add error: " + JSON.stringify(err, undefined, 2));
     } else {
       res.send(doc);
-      logdata(req,res,"Direct sale is posted by :" + req.user_id);
+      logdata(req, res, "Direct sale is posted by :" + req.user_id);
     }
   });
 };
@@ -56,10 +56,10 @@ module.exports.allDirectLands = (req, res) => {
   });
 };
 
-module.exports.acceptDirectLand = (req, res) => {
+module.exports.acceptOrDeleteDirectLand = (req, res) => {
   DirectLand.findByIdAndUpdate(
     req.body.id,
-    { status: 1 },
+    { status: req.body.status },
     { new: true },
     (err, doc) => {
       if (err) {
@@ -68,14 +68,14 @@ module.exports.acceptDirectLand = (req, res) => {
           .json({ status: false, message: "Record not found" });
       } else {
         res.send(doc);
-        logdata(req,res,"Apporved direct land ad by : "+ req.user_id);
+        logdata(req, res, "Apporved direct land ad by : " + req.user_id);
       }
     }
   );
 };
 
 module.exports.getLandsByUserId = (req, res) => {
-  DirectLand.find({ ownerId: req._id }, (err, doc) => {
+  DirectLand.find({ ownerId: req._id, status: 1 }, (err, doc) => {
     if (!err) {
       res.send(doc);
     } else {

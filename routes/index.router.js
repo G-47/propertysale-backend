@@ -25,7 +25,11 @@ router.get(
 );
 router.post("/getUser", ctrlUser.getUser);
 router.post("/getUsers", jwtHelper.verifyJwtToken, ctrlUser.getUsers);
-router.post("/approveUser", jwtHelper.verifyJwtToken, ctrlUser.approveUser);
+router.post(
+  "/approveOrDeleteUser",
+  jwtHelper.verifyJwtToken,
+  ctrlUser.approveOrDeleteUser
+);
 router.put("/updateUser", jwtHelper.verifyJwtToken, ctrlUser.updateUser);
 
 // DIRECT LAND/HOUSE CONTROLLERS
@@ -38,9 +42,9 @@ router.post(
   ctrlDirectLand.addDirectLand
 );
 router.put(
-  "/acceptDirectLand",
+  "/acceptOrDeleteDirectLand",
   jwtHelper.verifyJwtToken,
-  ctrlDirectLand.acceptDirectLand
+  ctrlDirectLand.acceptOrDeleteDirectLand
 );
 router.get(
   "/getLandsByUserId",
@@ -58,9 +62,9 @@ router.post(
   ctrlDirectHouse.addDirectHouse
 );
 router.put(
-  "/acceptDirectHouse",
+  "/acceptOrDeleteDirectHouse",
   jwtHelper.verifyJwtToken,
-  ctrlDirectHouse.acceptDirectHouse
+  ctrlDirectHouse.acceptOrDeleteDirectHouse
 );
 router.get(
   "/getHousesByUserId",

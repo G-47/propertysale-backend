@@ -44,7 +44,7 @@ module.exports.register = (req, res, next) => {
       }
     } else {
       res.send(doc);
-      logdata(req,res,"New user is registerd");
+      logdata(req, res, "New user is registerd");
     }
   });
 };
@@ -73,7 +73,7 @@ module.exports.getCurrentUser = (req, res) => {
   User.findById(req._id, (err, doc) => {
     if (!err) {
       res.send({ user: doc });
-      logdata(req,res, req.user_id + " is logged into system");
+      logdata(req, res, req.user_id + " is logged into system");
     } else {
       res.send("Error in retrieving: " + JSON.stringify(err, undefined, 2));
     }
@@ -100,10 +100,10 @@ module.exports.getUsers = (req, res) => {
   });
 };
 
-module.exports.approveUser = (req, res) => {
+module.exports.approveOrDeleteUser = (req, res) => {
   User.findByIdAndUpdate(
     req.body.id,
-    { status: 1 },
+    { status: req.body.status },
     { new: true },
     (err, doc) => {
       if (err) {
@@ -112,7 +112,7 @@ module.exports.approveUser = (req, res) => {
           .json({ status: false, message: "Record not found" });
       } else {
         res.send(doc);
-        logdata(req,res, "New user is approved")
+        logdata(req, res, "New user is approved");
       }
     }
   );
